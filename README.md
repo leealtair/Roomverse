@@ -48,12 +48,6 @@ Follow these instructions to get a local copy of the project up and running for 
 
 ---
 
-## 📸 Screenshots
-
-*(Add screenshots of your UI, dashboard, and questionnaire here)*
-
----
-
 ## 🗺️ Roadmap
 
 - [ ] Real-time in-app messaging between matched users.
