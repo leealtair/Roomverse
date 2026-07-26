@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomverse - Create Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .primary-btn {
+            background-color: #4f46e5;
+            transition: background-color 0.3s ease;
+        }
+
+        .primary-btn:hover {
+            background-color: #4338ca;
+        }
+
+        .primary-btn:disabled {
+            background-color: #6366f1;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div>
+            <a href="index.html" class="flex justify-center items-center space-x-2 mb-6">
+                <svg class="h-10 w-10 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span class="text-3xl font-bold text-gray-800">Roomverse</span>
+            </a>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Create Account
+            </h2>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Join thousands finding their perfect roommates
+            </p>
+        </div>
+        <div class="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
+            <h3 class="text-xl font-semibold text-gray-900 mb-6">Sign Up</h3>
+            <p class="text-gray-600 text-sm mb-6">Create your account to get started</p>
+            <form id="signup-form" class="space-y-6">
+                <div id="message-box" class="hidden p-4 rounded-md text-sm" role="alert">
+                    <div id="message-text"></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="first-name" class="block text-sm font-medium text-gray-700">
+                            First Name
+                        </label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <input id="first-name" name="first-name" type="text" autocomplete="given-name" required
+                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-2"
+                                placeholder="First name">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="last-name" class="block text-sm font-medium text-gray-700">
+                            Last Name
+                        </label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <input id="last-name" name="last-name" type="text" autocomplete="family-name" required
+                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-2"
+                                placeholder="Last name">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">
+                        Email
+                    </label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0018 4H2a2 2 0 00-.003 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                        </div>
+                        <input id="email" name="email" type="email" autocomplete="email" required
+                            class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-2"
+                            placeholder="Enter your email">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="phone-number" class="block text-sm font-medium text-gray-700">
+                        Phone Number
+                    </label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">+91</span>
+                        </div>
+                        <input id="phone-number" name="phone-number" type="tel" autocomplete="tel-national" required
+                            class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 sm:text-sm border-gray-300 rounded-md p-2"
+                            placeholder="XXXXX XXXXX">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="status" class="block text-sm font-medium text-gray-700">
+                        I am a
+                    </label>
+                    <div class="mt-1">
+                        <select id="status" name="status"
+                            class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option value="">Select your status</option>
+                            <option value="student">Student</option>
+                            <option value="young-professional">Young Professional</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        Password
+                    </label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input id="password" name="password" type="password" autocomplete="new-password" required
+                            class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-2"
+                            placeholder="Create a password">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">
+                        Confirm Password
+                    </label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input id="confirm-password" name="confirm-password" type="password" autocomplete="new-password"
+                            required
+                            class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-2"
+                            placeholder="Confirm your password">
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <input id="agree-terms" name="agree-terms" type="checkbox" required
+                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                    <label for="agree-terms" class="ml-2 block text-sm text-gray-900">
+                        I agree to the <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Terms of
+                            Service</a> and <a href="#"
+                            class="font-medium text-indigo-600 hover:text-indigo-500">Privacy Policy</a>.
+                    </label>
+                </div>
+
+                <div>
+                    <button type="submit" id="createAccountButton"
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 primary-btn">
+                        Create Account
+                    </button>
+                </div>
+            </form>
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">
+                    Already have an account?
+                    <a href="login.html" class="font-medium text-indigo-600 hover:text-indigo-500">
+                        Sign in
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { auth, db, appId } from "./firebase.js";
+        import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { ref, set } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+        // UI elements
+        const signupForm = document.getElementById('signup-form');
+        const createAccountButton = document.getElementById('createAccountButton');
+        const messageBox = document.getElementById('message-box');
+        const messageText = document.getElementById('message-text');
+
+        // Function to display messages in the UI
+        function showMessage(message, type) {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700', 'bg-blue-50', 'text-blue-700');
+            if (type === 'success') {
+                messageBox.classList.add('bg-green-50', 'text-green-700');
+            } else if (type === 'error') {
+                messageBox.classList.add('bg-red-50', 'text-red-700');
+            } else {
+                messageBox.classList.add('bg-blue-50', 'text-blue-700');
+            }
+        }
+
+        // Handle form submission
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Show loading state
+            createAccountButton.disabled = true;
+            createAccountButton.textContent = 'Creating Account...';
+            messageBox.classList.add('hidden');
+
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const email = document.getElementById('email').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+            const status = document.getElementById('status').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match!', 'error');
+                createAccountButton.disabled = false;
+                createAccountButton.textContent = 'Create Account';
+                return;
+            }
+
+            // Client-side password length validation
+            if (password.length < 6) {
+                showMessage('Password should be at least 6 characters long.', 'error');
+                createAccountButton.disabled = false;
+                createAccountButton.textContent = 'Create Account';
+                return;
+            }
+
+            try {
+                // Create user with email and password
+                // This function handles the authentication and user creation, so a separate sign-in step is not needed.
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                const userId = user.uid;
+
+                // Save additional user data to the Realtime Database
+                const userProfileRef = ref(db, `/artifacts/${appId}/users/${userId}/user_profiles`);
+                await set(userProfileRef, {
+                    firstName,
+                    lastName,
+                    email,
+                    phoneNumber,
+                    status,
+                    createdAt: new Date().toISOString()
+                });
+
+                showMessage('Account created successfully!', 'success');
+                console.log("User created and profile saved:", user);
+
+                // Redirect to the login page after a short delay
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+
+            } catch (error) {
+                let errorMessage = error.message;
+
+                // Check for specific error codes for better user feedback
+                if (error.code === 'auth/operation-not-allowed') {
+                    errorMessage = 'Email/Password sign-in is not enabled. Please enable it in your Firebase console.';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = 'Password is too weak. Please use a password of at least 6 characters.';
+                } else if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = 'The email address is already in use by another account.';
+                }
+
+                showMessage(`Error: ${errorMessage}`, 'error');
+                console.error("Signup error:", error);
+
+                // Re-enable the button on error
+                createAccountButton.disabled = false;
+                createAccountButton.textContent = 'Create Account';
+            }
+        });
+    </script>
+</body>
+
+</html>

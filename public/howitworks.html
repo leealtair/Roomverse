@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomverse - How It Works</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-10 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-800">Roomverse</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="login.html" class="text-gray-600 font-medium nav-link">Login</a>
+                    <a href="signup.html" class="bg-indigo-600 text-white font-medium px-5 py-2 rounded-lg primary-btn">Get Started</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-600 focus:outline-none">
+                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                    How Roomverse Works
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+                    Finding your perfect roommate has never been easier. Our simple 4-step process connects you with compatible people who share your lifestyle and preferences.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Step 1: Create Your Profile -->
+                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="step-circle bg-blue-600 mr-4">1</div>
+                        <h3 class="text-2xl font-bold text-gray-800">Create Your Profile</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Sign up and tell us about yourself, your preferences, lifestyle habits, and what you're looking for in a roommate.</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>Complete your personal information</li>
+                        <li>Set your budget and location preferences</li>
+                        <li>Share your lifestyle habits and interests</li>
+                        <li>Upload photos and verify your profile</li>
+                    </ul>
+                </div>
+                <div class="flex justify-center items-center p-4">
+                    <img src="https://placehold.co/400x300/E0E7FF/4338CA?text=Step+1+Illustration" alt="Step 1 Illustration" class="rounded-lg shadow-md max-w-full h-auto">
+                </div>
+
+                <!-- Step 2: Get AI-Powered Matches -->
+                <div class="flex justify-center items-center p-4 order-last lg:order-none">
+                    <img src="https://placehold.co/400x300/D1FAE5/065F46?text=Step+2+Illustration" alt="Step 2 Illustration" class="rounded-lg shadow-md max-w-full h-auto">
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="step-circle bg-green-500 mr-4">2</div>
+                        <h3 class="text-2xl font-bold text-gray-800">Get AI-Powered Matches</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Our advanced algorithm analyzes your preferences and finds the most compatible roommates in your area.</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>AI analyzes 50+ compatibility factors</li>
+                        <li>Location-based matching in your preferred areas</li>
+                        <li>Lifestyle and habit compatibility scoring</li>
+                        <li>Real-time match updates</li>
+                    </ul>
+                </div>
+
+                <!-- Step 3: Connect & Chat -->
+                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="step-circle bg-purple-600 mr-4">3</div>
+                        <h3 class="text-2xl font-bold text-gray-800">Connect & Chat</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Start conversations with your matches through our secure in-app messaging system.</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>Secure and private messaging</li>
+                        <li>Share photos and additional details</li>
+                        <li>Video call integration</li>
+                        <li>Safety features and reporting</li>
+                    </ul>
+                </div>
+                <div class="flex justify-center items-center p-4">
+                    <img src="https://placehold.co/400x300/EDE9FE/5B21B6?text=Step+3+Illustration" alt="Step 3 Illustration" class="rounded-lg shadow-md max-w-full h-auto">
+                </div>
+
+                <!-- Step 4: Meet & Move In -->
+                <div class="flex justify-center items-center p-4 order-last lg:order-none">
+                    <img src="https://placehold.co/400x300/FFEDD5/9A3412?text=Step+4+Illustration" alt="Step 4 Illustration" class="rounded-lg shadow-md max-w-full h-auto">
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="step-circle bg-orange-600 mr-4">4</div>
+                        <h3 class="text-2xl font-bold text-gray-800">Meet & Move In</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Meet your potential roommates in person, discuss arrangements, and find your perfect living situation.</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>Safe meeting guidelines</li>
+                        <li>Roommate agreement templates</li>
+                        <li>Move-in coordination tools</li>
+                        <li>Ongoing support and mediation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CTA Section at the bottom of How It Works page -->
+            <div class="cta-gradient py-12 px-8 rounded-lg text-center mt-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Get Started?</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-indigo-200">
+                    Join thousands who have found their perfect roommates
+                </p>
+                <div class="mt-8">
+                    <a href="signup.html" class="bg-white text-indigo-600 font-semibold px-8 py-4 rounded-lg inline-flex items-center text-lg hover:bg-gray-100 transition duration-300">
+                        Start Your Journey <span class="ml-2">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-gray-400 mt-20">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Footer Column 1: Brand -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="text-2xl font-bold text-white">Roomverse</span>
+                    </a>
+                    <p class="mt-4">India's most trusted platform for finding compatible roommates.</p>
+                </div>
+                <!-- Footer Column 2: Product -->
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Product</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="howitworks.html" class="hover:text-white">How it works</a></li>
+                        <li><a href="#" class="hover:text-white">Features</a></li>
+                    </ul>
+                </div>
+                <!-- Footer Column 3: Support -->
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Support</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Footer Column 4: Company -->
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Company</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 Roomverse. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomverse - Your Matches</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .primary-btn {
+            background-color: #4f46e5;
+            transition: background-color 0.3s ease;
+        }
+
+        .primary-btn:hover {
+            background-color: #4338ca;
+        }
+
+        .primary-btn:disabled {
+            background-color: #6366f1;
+            cursor: not-allowed;
+        }
+
+        .profile-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .match-percentage {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4f46e5;
+        }
+
+        .profile-img {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #f3f4f6;
+            margin-top: -4rem;
+        }
+
+        .placeholder-image {
+            background-color: #e5e7eb;
+            color: #9ca3af;
+            font-weight: 600;
+        }
+
+        .user-logged-in-nav .md\\:flex {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Header Section -->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-10 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-800">Roomverse</span>
+                </a>
+                <!-- <div id="auth-links-container" class="hidden md:flex items-center space-x-8">
+                    <a href="login.html" class="text-gray-600 font-medium nav-link">Login</a>
+                    <a href="signup.html"
+                        class="bg-indigo-600 text-white font-medium px-5 py-2 rounded-lg primary-btn">Get Started</a>
+                </div> -->
+                <div id="user-profile-container" class="hidden md:flex items-center space-x-4">
+                    <a href="profile.html" class="text-gray-600 font-medium">Profile</a>
+                    <a href="#" id="logout-btn"
+                        class="bg-gray-200 text-gray-700 font-medium px-5 py-2 rounded-lg">Logout</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                    Find Your Perfect Roommate
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+                    Click the button below to find your top matches based on your quiz answers.
+                </p>
+            </div>
+
+            <div class="flex justify-center mb-12">
+                <button id="find-match-btn"
+                    class="primary-btn px-8 py-4 rounded-full text-white font-semibold text-lg inline-flex items-center shadow-lg">
+                    Find My Roommate Match
+                    <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+
+            <div id="loading-indicator" class="hidden text-center">
+                <div class="flex justify-center items-center">
+                    <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                        </path>
+                    </svg>
+                    <p class="text-lg text-gray-700">Finding your perfect matches...</p>
+                </div>
+            </div>
+
+            <div id="matches-container" class="space-y-8">
+                <!-- Match profiles will be rendered here -->
+            </div>
+
+            <div id="message-box"
+                class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+                <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-auto text-center">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4" id="message-title"></h2>
+                    <p class="text-gray-700 mb-6" id="message-text"></p>
+                    <button class="primary-btn px-6 py-3 rounded-md text-white" id="message-box-ok-btn">OK</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-gray-400 mt-20">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="text-2xl font-bold text-white">Roomverse</span>
+                    </a>
+                    <p class="mt-4 text-sm max-w-xs">Connecting compatible students and young professionals to find
+                        their perfect roommate.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Product</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#" class="hover:text-white">How it works</a></li>
+                        <li><a href="#" class="hover:text-white">Features</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Support</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Company</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 Roomverse. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="./firebase.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"></script>
+    <!-- <script src="./firebase.js"></script> -->
+    <script type="module">
+        import {
+            auth,
+            appId
+        } from "./firebase.js";
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        const logoutBtn = document.getElementById('logout-btn');
+        // const authLinksContainer = document.getElementById('auth-links-container');
+        // const userProfileContainer = document.getElementById('user-profile-container');
+
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Remove login status from localStorage
+                localStorage.removeItem('isLoggedIn');
+                // Update the header immediately
+                // updateHeaderNav();
+                // Optional: Redirect to the homepage or login page
+                window.location.href = 'index.html';
+            });
+        }
+
+        // Add an event listener to the "Find My Roommate Match" button
+        document.getElementById('find-match-btn').addEventListener('click', async () => {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const matchesContainer = document.getElementById('matches-container');
+
+            // Show loading state
+            loadingIndicator.classList.remove('hidden');
+            matchesContainer.innerHTML = '';
+
+            // Wait for the user's authentication state to be determined
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const userId = user.uid;
+                    console.log("Authenticated with user ID:", userId);
+
+                    try {
+                        const response = await fetch('http://localhost:3000/api/findMatches', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ userId }),
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+
+                        const matches = await response.json();
+                        loadingIndicator.classList.add('hidden');
+                        renderMatches(matches);
+                    } catch (error) {
+                        console.error('Error finding matches:', error);
+                        loadingIndicator.classList.add('hidden');
+                        showMessage('Failed to find matches. Please try again later.', 'error');
+                    }
+                } else {
+                    console.log("User logged out or authentication failed.");
+                    loadingIndicator.classList.add('hidden');
+                    showMessage('Please log in to find your matches.', 'error');
+                }
+            });
+        });
+
+        function renderMatches(matches) {
+
+
+            const matchesContainer = document.getElementById('matches-container');
+            if (matches.length === 0) {
+                matchesContainer.innerHTML = `<p class="text-center text-gray-600">No matches found at this time.</p>`;
+                return;
+            }
+            matches.forEach(match => {
+                // console.log(match.matchUserId)
+                const profileCard = document.createElement('div');
+                profileCard.className = 'profile-card p-6 flex items-center space-x-6';
+                profileCard.innerHTML = `
+                    <div class="w-24 h-24 relative">
+                        <img src="${match.profileImageUrl || 'user.png'}" alt="Profile Image" class="profile-img">
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-2xl font-bold text-gray-900">${match.name || 'Anonymous User'}</h2>
+                        <div class="mt-2 flex items-center space-x-2">
+                            <span class="text-lg font-medium text-indigo-600">Match Percentage:</span>
+                            <span class="match-percentage">${match.matchPercentage}%</span>
+                        </div>
+                    </div>
+                    <button onclick="window.location.href='chat.html?partnerId=${match.matchUserId || "okaaaaa"}'"
+                            class="primary-btn px-4 py-2 rounded-lg text-white font-semibold">
+                        Chat
+                    </button>
+                `;
+                matchesContainer.appendChild(profileCard);
+            });
+        }
+        function showMessage(title, message) {
+            const messageBox = document.getElementById('message-box');
+            const messageTitle = document.getElementById('message-title');
+            const messageText = document.getElementById('message-text');
+
+            messageTitle.textContent = title;
+            messageText.textContent = message;
+            messageBox.classList.remove('hidden');
+
+            document.getElementById('message-box-ok-btn').addEventListener('click', () => {
+                messageBox.classList.add('hidden');
+            });
+        }
+
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomverse - User Profile</title>
+    <!-- Use Tailwind CSS for a modern, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Link to the external CSS file for global styles like primary-btn -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Ensure consistent font and background */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            /* Light gray background consistent with index/quiz */
+        }
+
+        .profile-pic-label {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .profile-pic-label:hover {
+            transform: scale(1.05);
+        }
+
+        /* Styles for custom message box */
+        .message-box {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .message-box.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Custom button styles to match index.html's look, if not already in style.css */
+        .primary-btn {
+            background-color: #4f46e5;
+            /* Indigo-600 */
+            color: #ffffff;
+            font-weight: 600;
+            /* Semibold */
+            padding: 0.75rem 1.5rem;
+            /* px-6 py-3 */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            /* shadow-md */
+            transition: background-color 0.3s ease;
+        }
+
+        .primary-btn:hover {
+            background-color: #4338ca;
+            /* Indigo-700 */
+        }
+
+        .secondary-btn {
+            background-color: #ffffff;
+            color: #4b5563;
+            /* Gray-700 */
+            border: 1px solid #d1d5db;
+            /* Gray-300 */
+            font-weight: 600;
+            /* Semibold */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            /* shadow-sm */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .secondary-btn:hover {
+            background-color: #f3f4f6;
+            /* Gray-100 */
+            border-color: #9ca3af;
+            /* Gray-400 */
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header Section (Copied from index.html for consistency) -->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-10 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-800">Roomverse</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex items-center justify-center p-4 pt-20"> <!-- Added pt-20 for fixed header clearance -->
+        <!-- Main Profile Card Container -->
+        <div class="w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-200">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">User Profile</h1>
+
+            <!-- Message Box for User Feedback -->
+            <div id="message-box"
+                class="message-box p-4 mb-6 rounded-lg text-sm transition-all duration-300 border border-transparent">
+            </div>
+
+            <!-- Profile Picture Section -->
+            <div class="flex flex-col items-center mb-10">
+                <label for="file-upload" class="profile-pic-label relative group">
+                    <img id="profile-picture"
+                        class="w-36 h-36 rounded-full object-cover border-4 border-indigo-500 shadow-lg ring-4 ring-indigo-200 ring-opacity-50"
+                        src="https://placehold.co/144x144/cbd5e1/000000?text=Upload"
+                        onerror="this.src='https://placehold.co/144x144/cbd5e1/000000?text=Upload';"
+                        alt="Profile Picture">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="text-white text-sm font-semibold">Upload Image</span>
+                    </div>
+                </label>
+                <input type="file" id="file-upload" class="hidden" accept="image/*">
+                <p id="upload-status" class="mt-2 text-sm text-gray-500"></p>
+            </div>
+
+            <!-- User Data Display -->
+            <div id="data-view" class="space-y-6">
+                <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                    <p class="text-sm font-medium text-gray-500">Email Address</p>
+                    <p id="user-email" class="text-lg font-semibold text-gray-900 mt-1"></p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                        <p class="text-sm font-medium text-gray-500">First Name</p>
+                        <p id="user-first-name" class="text-lg font-semibold text-gray-900 mt-1"></p>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                        <p class="text-sm font-medium text-gray-500">Last Name</p>
+                        <p id="user-last-name" class="text-lg font-semibold text-gray-900 mt-1"></p>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                    <p class="text-sm font-medium text-gray-500">Phone Number</p>
+                    <p id="user-phone" class="text-lg font-semibold text-gray-900 mt-1"></p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button id="edit-profile-btn" class="primary-btn flex-1">
+                        Edit Profile
+                    </button>
+                    <button id="logout-btn"
+                        class="secondary-btn flex-1 bg-red-600 text-white border-red-600 hover:bg-red-700 hover:border-red-700">
+                        Log Out
+                    </button>
+                </div>
+            </div>
+
+            <!-- Edit Profile Form (hidden by default) -->
+            <div id="edit-form" class="hidden space-y-6">
+                <div>
+                    <label for="first-name-input" class="block text-sm font-medium text-gray-700">First Name</label>
+                    <input type="text" id="first-name-input"
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="last-name-input" class="block text-sm font-medium text-gray-700">Last Name</label>
+                    <input type="text" id="last-name-input"
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="phone-input" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="tel" id="phone-input"
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button id="save-profile-btn" class="primary-btn flex-1 bg-green-600 hover:bg-green-700">
+                        Save Changes
+                    </button>
+                    <button id="cancel-edit-btn" class="secondary-btn flex-1">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section (Copied from index.html for consistency) -->
+    <footer class="bg-gray-900 text-gray-400 mt-20">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Footer Column 1: Brand -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="text-2xl font-bold text-white">Roomverse</span>
+                    </a>
+                    <p class="mt-4">India's most trusted platform for finding compatible roommates.</p>
+                </div>
+                <!-- Footer Column 2: Product -->
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Product</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="howitworks.html" class="hover:text-white">How it works</a></li>
+                        <li><a href="features.html" class="hover:text-white">Features</a></li>
+                    </ul>
+                </div>
+                <!-- Footer Column 3: Support -->
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Support</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Footer Column 4: Company -->
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Company</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 Roomverse. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module">
+        import { app, auth, db, appId } from './firebase.js';
+        import { onAuthStateChanged, signOut, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+        // import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+
+        const database = db; // Use the 'db' export from firebase.js as 'database'
+        // const storage = getStorage(app); // Initialize storage with the 'app' export from firebase.js
+
+        let userId = null;
+
+        // UI elements
+        const messageBox = document.getElementById('message-box');
+        const userEmail = document.getElementById('user-email');
+        const userFirstName = document.getElementById('user-first-name');
+        const userLastName = document.getElementById('user-last-name');
+        const userPhone = document.getElementById('user-phone');
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+        const saveProfileBtn = document.getElementById('save-profile-btn');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const dataView = document.getElementById('data-view');
+        const editForm = document.getElementById('edit-form');
+        const firstNameInput = document.getElementById('first-name-input');
+        const lastNameInput = document.getElementById('last-name-input');
+        const phoneInput = document.getElementById('phone-input');
+
+        // Function to show messages
+        const showMessage = (text, type = 'info') => {
+            messageBox.textContent = text;
+            messageBox.className = `p-4 mb-6 rounded-lg text-sm transition-all duration-300 message-box show`;
+            if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'text-green-700', 'border-green-200');
+            } else if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'text-red-700', 'border-red-200');
+            } else {
+                messageBox.classList.add('bg-blue-100', 'text-blue-700', 'border-blue-200');
+            }
+
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+                messageBox.textContent = '';
+                messageBox.classList.remove('bg-green-100', 'text-green-700', 'border-green-200', 'bg-red-100', 'text-red-700', 'border-red-200', 'bg-blue-100', 'text-blue-700', 'border-blue-200');
+            }, 5000);
+        };
+
+        // Function to load user profile data
+        const loadUserProfile = (uid) => {
+            // Reference to the user's data in the Realtime Database
+            const userRef = ref(database, `artifacts/${appId}/users/` + uid + '/user_profiles');
+            // Listen for changes in real-time
+            onValue(userRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    // Update display elements with data
+                    userEmail.textContent = data.email || 'N/A';
+                    userFirstName.textContent = data.firstName || 'N/A';
+                    userLastName.textContent = data.lastName || 'N/A';
+                    userPhone.textContent = data.phoneNumber || 'N/A';
+
+                    // Pre-fill form inputs for editing
+                    firstNameInput.value = data.firstName || '';
+                    lastNameInput.value = data.lastName || '';
+                    phoneInput.value = data.phoneNumber || '';
+                } else {
+                    console.log("No user data found.");
+                    userFirstName.textContent = 'N/A';
+                    userLastName.textContent = 'N/A';
+                    userPhone.textContent = 'N/A';
+                }
+            });
+
+        };
+
+        // Function to update profile data
+        const updateProfileData = async () => {
+            const userRef = ref(database, `artifacts/${appId}/users/${userId}/user_profiles`);
+            const newProfileData = {
+                firstName: firstNameInput.value,
+                lastName: lastNameInput.value,
+                phoneNumber: phoneInput.value,
+            };
+
+            try {
+                await update(userRef, newProfileData);
+                showMessage("Profile updated successfully!", 'success');
+                // Switch back to data view
+                dataView.classList.remove('hidden');
+                editForm.classList.add('hidden');
+            } catch (error) {
+                console.error("Error updating profile: ", error);
+                showMessage("Failed to update profile.", 'error');
+            }
+        };
+
+
+        // Event listeners for buttons
+        editProfileBtn.addEventListener('click', () => {
+            dataView.classList.add('hidden');
+            editForm.classList.remove('hidden');
+        });
+
+        saveProfileBtn.addEventListener('click', updateProfileData);
+
+        cancelEditBtn.addEventListener('click', () => {
+            dataView.classList.remove('hidden');
+            editForm.classList.add('hidden');
+        });
+
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                localStorage.setItem('isLoggedIn', 'false');
+                // The onAuthStateChanged listener will handle the redirect
+            } catch (error) {
+                console.error("Error signing out: ", error);
+                showMessage("Failed to log out.", 'error');
+            }
+        });
+
+        // Listen for user authentication state changes
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in
+                userId = user.uid;
+                userEmail.textContent = user.email || 'N/A';
+                console.log("User signed in with UID:", userId);
+                loadUserProfile(userId);
+            } else {
+                // User is signed out or not authenticated yet, try custom token or anonymously
+                if (typeof __initial_auth_token !== 'undefined') {
+                    try {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                        // If successful, onAuthStateChanged will fire again with the user
+                    } catch (error) {
+                        console.error("Error signing in with custom token: ", error);
+                        showMessage("Failed to authenticate. Redirecting to login page.", 'error');
+                        window.location.href = 'login.html'; // Redirect if token fails
+                    }
+                } else {
+                    // Sign in anonymously if no custom token is available
+                    try {
+                        await signInAnonymously(auth);
+                        // If successful, onAuthStateChanged will fire again with the user
+                    } catch (error) {
+                        console.error("Error signing in anonymously: ", error);
+                        showMessage("Failed to authenticate anonymously. Redirecting to login page.", 'error');
+                        window.location.href = 'login.html'; // Redirect if anonymous fails
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

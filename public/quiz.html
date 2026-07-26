@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomverse - Matching Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Custom styles for the range slider */
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #d1d5db;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #4f46e5;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -6px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #4f46e5;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* Styles for preference buttons */
+        .preference-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #d1d5db;
+            background-color: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .preference-btn.active {
+            background-color: #4f46e5;
+            color: #ffffff;
+            border-color: #4f46e5;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <header class="bg-white/80 backdrop-blur-lg top-0 left-0 right-0 z-10 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-800">Roomverse</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8 relative">
+                    <div class="relative">
+                        <img src="user.png" id="profile-icon"
+                            class="h-14 w-14 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+                            alt="Profile Icon">
+
+                        <div id="profile-dropdown"
+                            class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden z-20">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                id="account-link">Account</a>
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                id="edit-profile-link">Edit Profile</a>
+                            <a href="contact.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                id="support-link">Support</a>
+                            <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                id="logout-link">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20" style="padding-top: 4rem;">
+        <div class="container mx-auto px-6 max-w-2xl">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                    Matching Quiz
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+                    In this step, you'll answer some questions that will help us match you with potential roommates.
+                </p>
+            </div>
+
+            <div class="bg-white py-8 px-6 shadow-lg rounded-xl space-y-8">
+                <div id="quiz-container">
+                </div>
+
+                <div class="flex justify-between mt-8">
+                    <button id="prev-btn"
+                        class="secondary-btn px-6 py-3 rounded-md text-gray-700 bg-white border border-gray-300">
+                        ← Previous
+                    </button>
+                    <button id="next-btn" class="primary-btn px-6 py-3 rounded-md text-white bg-indigo-600">
+                        Next →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 mt-20">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="text-2xl font-bold text-white">Roomverse</span>
+                    </a>
+                    <p class="mt-4">India's most trusted platform for finding compatible roommates.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Product</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="howitworks.html" class="hover:text-white">How it works</a></li>
+                        <li><a href="features.html" class="hover:text-white">Features</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Support</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Company</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 Roomverse. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import {
+            auth,
+            appId
+        } from "./firebase.js";
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        const questions = [{
+            question: "How often do you bathe or shower?",
+            minLabel: "Rarely",
+            maxLabel: "Daily",
+            type: "slider"
+        }, {
+            question: "How clean and neat do you keep your room?",
+            minLabel: "Not clean",
+            maxLabel: "Very Clean",
+            type: "slider"
+        }, {
+            question: "How outgoing are you?",
+            minLabel: "Not at all",
+            maxLabel: "Very",
+            type: "slider"
+        }, {
+            question: "How close do you want to be with your roommate?",
+            minLabel: "Not Close",
+            maxLabel: "Very Close",
+            type: "slider"
+        }, {
+            question: "Can your roommate use your belongings?",
+            minLabel: "Not at all",
+            maxLabel: "Any time",
+            type: "slider"
+        }, {
+            question: "What's your planned Study/Party balance?",
+            minLabel: "All study",
+            maxLabel: "All party",
+            type: "slider"
+        }, {
+            question: "What noise level do you prefer while studying?",
+            minLabel: "None",
+            maxLabel: "All the noise",
+            type: "slider"
+        }, {
+            question: "Do you plan on having friends in your room?",
+            minLabel: "Never",
+            maxLabel: "Always",
+            type: "slider"
+        }, {
+            question: "How often do you plan to be in the room?",
+            minLabel: "Never",
+            maxLabel: "Always",
+            type: "slider"
+        }, {
+            question: "What time do you go to bed?",
+            minLabel: "Before 10PM",
+            maxLabel: "After 2AM",
+            type: "slider"
+        }, {
+            question: "Do you smoke?",
+            minLabel: "Never",
+            maxLabel: "Daily",
+            type: "slider"
+        }, {
+            question: "What temperature do you prefer in your room?",
+            minLabel: "North Pole",
+            maxLabel: "Fires of Hell",
+            type: "slider"
+        }, {
+            question: "What's your sexuality?",
+            options: ["Straight", "Bicurious", "Bisexual", "Gay", "Other"],
+            type: "dropdown",
+            preferenceOptions: ["Doesn't Matter", "The Same"]
+        }, {
+            question: "How likely are you to have overnight guests?",
+            minLabel: "Never",
+            maxLabel: "Nightly",
+            type: "slider"
+        }, {
+            question: "How do you stand politically?",
+            options: ["Very Conservative", "Conservative", "Moderate", "Liberal", "Very Liberal"],
+            type: "dropdown",
+            preferenceOptions: ["Doesn't Matter", "The Same"]
+        }, {
+            question: "What religion are you?",
+            options: ["Christian", "Jewish", "Muslim", "Buddhist", "Hindu", "Spiritual, but not religious", "Agnostic", "Atheist", "Satanist", "Other"],
+            type: "dropdown",
+            preferenceOptions: ["Doesn't Matter", "The Same"]
+        }, ];
+
+        let currentQuestionIndex = 0;
+        const quizContainer = document.getElementById('quiz-container');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+
+        let userId = null;
+        let isAuthReady = false;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                userId = user.uid;
+                console.log("Authenticated with user ID:", userId);
+            } else {
+                userId = null;
+                console.log("User logged out or authentication failed.");
+            }
+            isAuthReady = true;
+        });
+
+        async function saveAnswerToMongoDB(answersData) {
+            if (!isAuthReady || !userId) {
+                console.error("Firebase is not authenticated yet or userId is missing. Cannot save data.");
+                return {
+                    success: false,
+                    error: "Authentication not ready."
+                };
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/saveQuizAnswer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        answer: answersData
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log("Quiz answer saved successfully to MongoDB:", result);
+                return {
+                    success: true
+                };
+            } catch (error) {
+                console.error("Error saving answer to MongoDB:", error);
+                return {
+                    success: false,
+                    error: error.message
+                };
+            }
+        }
+
+        function collectCurrentAnswer() {
+            const currentQuestion = questions[currentQuestionIndex];
+            const answer = {
+                // Use the question text as a unique identifier for updating
+                questionId: currentQuestion.question,
+                userAnswer: null,
+                preferredAnswer: null,
+                importance: null,
+            };
+
+            const importanceButton = document.querySelector('.preference-btn.active');
+            if (importanceButton) {
+                answer.importance = importanceButton.dataset.value;
+            } else {
+                answer.importance = "not-important";
+            }
+
+            if (currentQuestion.type === 'slider') {
+                const yourSlider = document.getElementById('your-answer-slider');
+                const preferredSlider = document.getElementById('preferred-answer-slider');
+                answer.userAnswer = yourSlider ? parseInt(yourSlider.value) : null;
+                answer.preferredAnswer = preferredSlider ? parseInt(preferredSlider.value) : null;
+            } else if (currentQuestion.type === 'dropdown') {
+                const yourDropdown = document.getElementById('your-answer');
+                const preferredDropdown = document.getElementById('preferred-answer');
+                answer.userAnswer = yourDropdown ? yourDropdown.value : null;
+                answer.preferredAnswer = preferredDropdown ? preferredDropdown.value : null;
+            }
+            return answer;
+        }
+
+
+        function renderQuestion() {
+            const q = questions[currentQuestionIndex];
+            let questionHTML = `
+                <div class="space-y-6">
+                    <div class="text-sm font-semibold text-gray-500 mb-4 text-center">
+                        &lt;${currentQuestionIndex + 1} of ${questions.length}&gt;
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900">Q${currentQuestionIndex + 1} - ${q.question}</h3>
+            `;
+
+            if (q.type === 'slider') {
+                questionHTML += `
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">YOUR ANSWER</label>
+                        <div class="flex justify-between text-xs text-gray-500 mb-2">
+                            <span>${q.minLabel}</span>
+                            <span>${q.maxLabel}</span>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="range-slider" id="your-answer-slider">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">PREFERRED ROOMMATE ANSWER</label>
+                        <div class="flex justify-between text-xs text-gray-500 mb-2">
+                            <span>${q.minLabel}</span>
+                            <span>${q.maxLabel}</span>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="range-slider" id="preferred-answer-slider">
+                    </div>
+                `;
+            } else if (q.type === 'dropdown') {
+                const yourOptions = q.options.map(opt => `<option>${opt}</option>`).join('');
+                const preferredOptions = q.preferenceOptions.map(opt => `<option>${opt}</option>`).join('');
+                questionHTML += `
+                    <div>
+                        <label for="your-answer" class="block text-sm font-medium text-gray-700">YOUR ANSWER</label>
+                        <div class="mt-1">
+                            <select id="your-answer" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option>Select an option</option>
+                                ${yourOptions}
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="preferred-answer" class="block text-sm font-medium text-gray-700">PREFERRED ROOMMATE ANSWER</label>
+                        <div class="mt-1">
+                            <select id="preferred-answer" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option>Select an option</option>
+                                ${preferredOptions}
+                            </select>
+                        </div>
+                    </div>
+                `;
+            }
+
+            questionHTML += `
+                <div class="flex justify-around space-x-4">
+                    <button class="preference-btn not-important hover:bg-gray-200" data-value="not-important">Not Important</button>
+                    <button class="preference-btn important hover:bg-gray-200" data-value="important">Important</button>
+                    <button class="preference-btn very-important hover:bg-gray-200" data-value="very-important">Very Important</button>
+                </div>
+            </div>
+            `;
+            quizContainer.innerHTML = questionHTML;
+            updateNavigationButtons();
+
+            document.querySelectorAll('.preference-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    document.querySelectorAll('.preference-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            document.querySelectorAll('.range-slider').forEach(slider => {
+                const updateSliderBackground = () => {
+                    const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+                    const midpoint = 50;
+
+                    let backgroundStyle = ``;
+                    if (value == midpoint) {
+                        backgroundStyle = `linear-gradient(to right, #d1d5db 0%, #d1d5db 100%)`;
+                    } else if (value < midpoint) {
+                        const fillStart = value;
+                        backgroundStyle = `linear-gradient(to right, #d1d5db 0%, #d1d5db ${fillStart}%, #4f46e5 ${fillStart}%, #4f46e5 50%, #d1d5db 50%, #d1d5db 100%)`;
+                    } else {
+                        const fillEnd = value;
+                        backgroundStyle = `linear-gradient(to right, #d1d5db 0%, #d1d5db 50%, #4f46e5 50%, #4f46e5 ${fillEnd}%, #d1d5db ${fillEnd}%, #d1d5db 100%)`;
+                    }
+
+                    slider.style.background = backgroundStyle;
+                };
+
+                slider.addEventListener('input', updateSliderBackground);
+                updateSliderBackground();
+            });
+        }
+
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.textContent = currentQuestionIndex === questions.length - 1 ? 'Finish Quiz' : 'Next →';
+            prevBtn.style.opacity = prevBtn.disabled ? '0.5' : '1';
+        }
+
+        nextBtn.addEventListener('click', async () => {
+            if (!isAuthReady || !userId) {
+                console.error("Cannot save answer: Firebase auth not ready.");
+                const messageModal = createMessageBox('Error', 'Authentication not ready. Please wait a moment and try again.', () => {
+                    console.log('Authentication error modal closed.');
+                });
+                document.body.appendChild(messageModal);
+                return;
+            }
+
+            const currentAnswer = collectCurrentAnswer();
+            const saveResult = await saveAnswerToMongoDB(currentAnswer);
+
+            if (saveResult.success) {
+                if (currentQuestionIndex < questions.length - 1) {
+                    currentQuestionIndex++;
+                    renderQuestion();
+                } else {
+                    const quizFinishedModal = document.createElement('div');
+                    quizFinishedModal.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50';
+                    quizFinishedModal.innerHTML = `
+                        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-auto text-center">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Quiz Finished!</h2>
+                            <p class="text-gray-700 mb-6">Your answers have been saved. Redirecting to home...</p>
+                            <button id="close-modal-btn" class="primary-btn px-6 py-3 rounded-md text-white bg-indigo-600">OK</button>
+                        </div>
+                    `;
+                    document.body.appendChild(quizFinishedModal);
+
+                    document.getElementById('close-modal-btn').addEventListener('click', () => {
+                        quizFinishedModal.remove();
+                        window.location.href = 'index.html';
+                    });
+                }
+            } else {
+                const errorModal = createMessageBox('Error', `Failed to save quiz data: ${saveResult.error}`, () => {
+                    console.error('Quiz save error modal closed.');
+                });
+                document.body.appendChild(errorModal);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuestion();
+
+            const profileIcon = document.getElementById('profile-icon');
+            const profileDropdown = document.getElementById('profile-dropdown');
+
+            profileIcon.addEventListener('click', (event) => {
+                event.stopPropagation();
+                profileDropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!profileDropdown.contains(event.target) && !profileIcon.contains(event.target)) {
+                    profileDropdown.classList.add('hidden');
+                }
+            });
+
+            document.getElementById('account-link').addEventListener('click', (event) => {
+                event.preventDefault();
+                const messageModal = createMessageBox('Account', 'Navigating to your account settings.', () => {
+                    console.log('Account link clicked');
+                });
+                document.body.appendChild(messageModal);
+                profileDropdown.classList.add('hidden');
+            });
+
+            document.getElementById('edit-profile-link').addEventListener('click', (event) => {
+                event.preventDefault();
+                const messageModal = createMessageBox('Edit Profile', 'Opening your profile editor.', () => {
+                    console.log('Edit Profile link clicked');
+                    window.location.href = 'profile.html';
+                });
+                document.body.appendChild(messageModal);
+                profileDropdown.classList.add('hidden');
+            });
+
+            document.getElementById('support-link').addEventListener('click', (event) => {
+                event.preventDefault();
+                const messageModal = createMessageBox('Support', 'Redirecting to the support page. Please find answers to your questions there.', () => {
+                    console.log('Support link clicked');
+                    window.location.href = 'contact.html';
+                });
+                document.body.appendChild(messageModal);
+                profileDropdown.classList.add('hidden');
+            });
+
+            document.getElementById('logout-link').addEventListener('click', async (event) => {
+                event.preventDefault();
+                localStorage.setItem('isLoggedIn', 'false');
+                try {
+                    await signOut(auth);
+                } catch (error) {
+                    console.error("Error signing out: ", error);
+                    showMessage("Failed to log out.", 'error');
+                }
+                const messageModal = createMessageBox('Logout', 'You have been successfully logged out.', () => {
+                    console.log('Logout link clicked');
+                });
+                document.body.appendChild(messageModal);
+                profileDropdown.classList.add('hidden');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            });
+        });
+
+        function createMessageBox(title, message, callback) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-auto text-center">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">${title}</h2>
+                    <p class="text-gray-700 mb-6">${message}</p>
+                    <button class="primary-btn px-6 py-3 rounded-md text-white bg-indigo-600" id="message-box-ok-btn">OK</button>
+                </div>
+            `;
+
+            modal.querySelector('#message-box-ok-btn').addEventListener('click', () => {
+                modal.remove();
+                if (callback) callback();
+            });
+            return modal;
+        }
+    </script>
+</body>
+
+</html>

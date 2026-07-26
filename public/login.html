@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomverse - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .primary-btn {
+            background-color: #4f46e5;
+            transition: background-color 0.3s ease;
+        }
+
+        .primary-btn:hover {
+            background-color: #4338ca;
+        }
+
+        .primary-btn:disabled {
+            background-color: #6366f1;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div>
+            <a href="index.html" class="flex justify-center items-center space-x-2 mb-6">
+                <svg class="h-10 w-10 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span class="text-3xl font-bold text-gray-800">Roomverse</span>
+            </a>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Welcome Back
+            </h2>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Sign in to find your perfect roommate
+            </p>
+        </div>
+        <div class="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
+            <h3 class="text-xl font-semibold text-gray-900 mb-6">Sign In</h3>
+            <p class="text-gray-600 text-sm mb-6">Enter your credentials to access your account</p>
+            <form id="login-form" class="space-y-6">
+                <div id="message-box" class="hidden p-4 rounded-md text-sm" role="alert">
+                    <div id="message-text"></div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">
+                        Email
+                    </label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0018 4H2a2 2 0 00-.003 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                        </div>
+                        <input id="email" name="email" type="email" autocomplete="email" required
+                            class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-2">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        Password
+                    </label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input id="password" name="password" type="password" autocomplete="current-password" required
+                            class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-2">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                            <svg class="h-5 w-5 text-gray-400 cursor-pointer" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd"
+                                    d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                            Forgot password?
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" id="loginButton"
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 primary-btn">
+                        Sign In
+                    </button>
+                </div>
+            </form>
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">
+                    Don't have an account?
+                    <a href="signup.html" class="font-medium text-indigo-600 hover:text-indigo-500">
+                        Sign up
+                    </a>
+                </p>
+            </div>
+            <div class="mt-8 text-center text-xs text-gray-500">
+                By signing in, you agree to our <a href="#" class="text-indigo-600 hover:text-indigo-500">Terms of
+                    Service</a> and <a href="#" class="text-indigo-600 hover:text-indigo-500">Privacy Policy</a>.
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import {
+            getAuth,
+            signInWithEmailAndPassword
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // Firebase configuration from firebase.js
+        import { app, auth } from './firebase.js';
+
+        // UI elements
+        const loginForm = document.getElementById('login-form');
+        const loginButton = document.getElementById('loginButton');
+        const messageBox = document.getElementById('message-box');
+        const messageText = document.getElementById('message-text');
+
+        // Function to display messages in the UI
+        function showMessage(message, type) {
+            messageText.textContent = message;
+            messageBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700', 'bg-blue-50', 'text-blue-700');
+            if (type === 'success') {
+                messageBox.classList.add('bg-green-50', 'text-green-700');
+            } else if (type === 'error') {
+                messageBox.classList.add('bg-red-50', 'text-red-700');
+            } else {
+                messageBox.classList.add('bg-blue-50', 'text-blue-700');
+            }
+        }
+
+        // Handle form submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Show loading state
+            loginButton.disabled = true;
+            loginButton.textContent = 'Signing In...';
+            messageBox.classList.add('hidden');
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Sign in the user with email and password
+                await signInWithEmailAndPassword(auth, email, password);
+
+                // Store login status in localStorage upon successful login
+                localStorage.setItem('isLoggedIn', 'true');
+
+                showMessage('Login successful! Redirecting...', 'success');
+                console.log("User logged in successfully.");
+
+                // Redirect to the profile page after a short delay
+                setTimeout(() => {
+                    window.location.href = 'quiz2.html';
+                }, 1000);
+
+
+            } catch (error) {
+                let errorMessage = error.message;
+
+                // Check for specific error codes for better user feedback
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+                    errorMessage = 'Invalid email or password. Please try again.';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'The email address is not valid.';
+                }
+
+                showMessage(`Error: ${errorMessage}`, 'error');
+                console.error("Login error:", error);
+
+                // Re-enable the button on error
+                loginButton.disabled = false;
+                loginButton.textContent = 'Sign In';
+            }
+        });
+    </script>
+</body>
+
+</html>

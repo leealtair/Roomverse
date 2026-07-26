@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomverse - Find Your Perfect Roommate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-10 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-800">Roomverse</span>
+                </a>
+                <div id="auth-links-container" class="hidden md:flex items-center space-x-8">
+                    <a href="login.html" class="text-gray-600 font-medium nav-link">Login</a>
+                    <a href="signup.html"
+                        class="bg-indigo-600 text-white font-medium px-5 py-2 rounded-lg primary-btn">Get Started</a>
+                </div>
+                <div id="user-profile-container" class="hidden md:flex items-center space-x-4">
+                    <a href="chat.html" class="text-gray-600 font-medium">Chat</a>
+                    <a href="profile.html" class="text-gray-600 font-medium">Profile</a>
+                    <a href="#" id="logout-btn"
+                        class="bg-gray-200 text-gray-700 font-medium px-5 py-2 rounded-lg">Logout</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-gradient pt-32 pb-20">
+            <div class="container mx-auto px-6 text-center">
+                <div class="inline-block bg-indigo-100 text-indigo-700 text-sm font-medium px-4 py-1 rounded-full mb-4">
+                    <span class="mr-1">🏠</span> India's #1 Roommate Matching Platform
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+                    Find Your Perfect <span class="brand-text-gradient">Roommate</span>
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-600">
+                    Connect with compatible students and young professionals across India. Our AI-powered matching
+                    ensures you find roommates who share your lifestyle, habits, and preferences.
+                </p>
+                <div class="mt-8 flex justify-center space-x-4">
+                    <a href="signup.html"
+                        class="primary-btn text-white font-semibold px-8 py-3 rounded-lg inline-flex items-center">
+                        Start Matching <span class="ml-2">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Why Choose Roomverse?</h2>
+                    <p class="mt-4 text-lg text-gray-600">We use advanced technology and deep understanding of Indian
+                        living preferences to create perfect matches.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white border border-gray-200 rounded-xl p-8 text-center feature-card">
+                        <div
+                            class="mx-auto bg-blue-100 text-blue-600 rounded-full h-16 w-16 flex items-center justify-center">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.373 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.648l-.21 1.05a2.25 2.25 0 001.693 2.693l1.05.21a2.25 2.25 0 002.693-1.693l.21-1.05a2.25 2.25 0 00-1.693-2.693l-1.05-.21a2.25 2.25 0 00-2.693 1.693z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mt-6 mb-2">AI-Powered Matching</h3>
+                        <p class="text-gray-600">Advanced algorithms analyze your preferences, habits, and lifestyle to
+                            find the most compatible roommates.</p>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-xl p-8 text-center feature-card">
+                        <div
+                            class="mx-auto bg-green-100 text-green-600 rounded-full h-16 w-16 flex items-center justify-center">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mt-6 mb-2">Verified Profiles</h3>
+                        <p class="text-gray-600">All users go through verification process ensuring safe and authentic
+                            connections.</p>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-xl p-8 text-center feature-card">
+                        <div
+                            class="mx-auto bg-purple-100 text-purple-600 rounded-full h-16 w-16 flex items-center justify-center">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.72 3.72a1.125 1.125 0 01-1.59 0l-3.72-3.72A2.122 2.122 0 013 14.894V10.608c0-.97.616-1.813 1.5-2.097m14.25 0a2.121 2.121 0 00-2.121-2.121H6.375a2.121 2.121 0 00-2.121 2.121" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mt-6 mb-2">In-App Chat</h3>
+                        <p class="text-gray-600">Connect and get to know potential roommates through our secure
+                            messaging system.</p>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-xl p-8 text-center feature-card">
+                        <div
+                            class="mx-auto bg-orange-100 text-orange-600 rounded-full h-16 w-16 flex items-center justify-center">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mt-6 mb-2">Location-Based Search</h3>
+                        <p class="text-gray-600">Find roommates in your preferred localities across major Indian cities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">How It Works</h2>
+                    <p class="mt-4 text-lg text-gray-600">Simple steps to find your ideal roommate</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="step-circle bg-blue-600">1</div>
+                        <h3 class="text-xl font-bold mt-6 mb-2">Create Your Profile</h3>
+                        <p class="text-gray-600">Tell us about your preferences, lifestyle, and what you're looking for
+                            in a roommate.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="step-circle bg-green-500">2</div>
+                        <h3 class="text-xl font-bold mt-6 mb-2">Get AI Matches</h3>
+                        <p class="text-gray-600">Our smart algorithm finds the most compatible roommates based on your
+                            criteria.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="step-circle bg-purple-600">3</div>
+                        <h3 class="text-xl font-bold mt-6 mb-2">Connect & Move In</h3>
+                        <p class="text-gray-600">Chat with matches, meet in person, and find your perfect living
+                            arrangement.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-gradient py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Find Your Perfect Roommate?</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-indigo-200">
+                    Join thousands of students and professionals who have found their ideal living companions through
+                    Roomverse.
+                </p>
+                <div class="mt-8">
+                    <a href="signup.html"
+                        class="bg-white text-indigo-600 font-semibold px-8 py-4 rounded-lg inline-flex items-center text-lg hover:bg-gray-100 transition duration-300">
+                        Get Started for Free <span class="ml-2">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="text-2xl font-bold text-white">Roomverse</span>
+                    </a>
+                    <p class="mt-4">India's most trusted platform for finding compatible roommates.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Product</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="howitworks.html" class="hover:text-white">How it works</a></li>
+                        <li><a href="features.html" class="hover:text-white">Features</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Support</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase">Company</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 Roomverse. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Get the containers for the links
+        const authLinksContainer = document.getElementById('auth-links-container');
+        const userProfileContainer = document.getElementById('user-profile-container');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // Function to update the header based on login status
+        function updateHeaderNav() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                // User is logged in: show profile/logout, hide login/signup
+                if (authLinksContainer) authLinksContainer.style.display = 'none';
+                if (userProfileContainer) userProfileContainer.style.display = 'flex';
+            } else {
+                // User is logged out: show login/signup, hide profile/logout
+                if (authLinksContainer) authLinksContainer.style.display = 'flex';
+                if (userProfileContainer) userProfileContainer.style.display = 'none';
+            }
+        }
+
+        // Handle logout button click
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Remove login status from localStorage
+                localStorage.removeItem('isLoggedIn');
+                // Update the header immediately
+                updateHeaderNav();
+                // Optional: Redirect to the homepage or login page
+                window.location.href = 'index.html';
+            });
+        }
+
+        // Call the function on page load to set the initial state
+        document.addEventListener('DOMContentLoaded', updateHeaderNav);
+    </script>
+
+</body>
+
+</html>
