@@ -1,23 +1,25 @@
+require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
 const path = require('path');
-
-const {
-    MongoClient,
-    ServerApiVersion
-} = require('mongodb');
 const cors = require('cors');
-const {
-    GoogleGenerativeAI
-} = require("@google/generative-ai");
-
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Enable JSON body parsing
 
+// Retrieve sensitive keys safely from environment variables
+const uri = process.env.MONGO_URI;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-// Replace with your MongoDB connection string
-const uri = "mongodb://leealtair119_db_user:PNcDRrIBmxgOQce6@ac-orly7iq-shard-00-00.zbbutim.mongodb.net:27017,ac-orly7iq-shard-00-01.zbbutim.mongodb.net:27017,ac-orly7iq-shard-00-02.zbbutim.mongodb.net:27017/?ssl=true&replicaSet=atlas-4jnilt-shard-0&authSource=admin&appName=Roomverse";
+if (!uri || !GEMINI_API_KEY) {
+  console.error("Missing MONGO_URI or GEMINI_API_KEY in environment variables.");
+  process.exit(1);
+}
 
 const client = new MongoClient(uri, {
     serverApi: {
@@ -26,13 +28,6 @@ const client = new MongoClient(uri, {
         deprecationErrors: true,
     }
 });
-
-app.use(cors()); // Enable CORS
-app.use(express.json()); // Enable JSON body parsing
-
-// Use a secure way to store your API key, not hardcoded
-const GEMINI_API_KEY = "AIzaSyC6hUq3LjvrR6QdiUOgl-0LKIuIoTu1qHA";
-// const GEMINI_API_KEY = "AIzaSyCuzWPsAMl5AiiKEbS4kIABkVyGZtBn35w";
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
